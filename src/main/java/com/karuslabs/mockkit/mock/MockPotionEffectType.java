@@ -16,7 +16,7 @@
  */
 package com.karuslabs.mockkit.mock;
 
-import com.karuslabs.mockkit.annotations.PartialMock;
+import com.karuslabs.mockkit.annotations.*;
 
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
@@ -79,7 +79,7 @@ public class MockPotionEffectType {
         }
         
         
-        public PotionEffectType build() {
+        public @Mock PotionEffectType build() {
             return type;
         }
         

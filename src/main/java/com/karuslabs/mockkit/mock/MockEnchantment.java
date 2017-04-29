@@ -16,7 +16,7 @@
  */
 package com.karuslabs.mockkit.mock;
 
-import com.karuslabs.mockkit.annotations.PartialMock;
+import com.karuslabs.mockkit.annotations.*;
 
 import org.bukkit.enchantments.*;
 import org.bukkit.inventory.ItemStack;
@@ -113,7 +113,7 @@ public class MockEnchantment {
         }
         
         
-        public Enchantment build() {
+        public @Mock Enchantment build() {
             return enchantment;
         } 
         

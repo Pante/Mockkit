@@ -16,11 +16,15 @@
  */
 package com.karuslabs.mockkit.mock.inventory;
 
-import com.karuslabs.mockkit.annotations.PartialMock;
+import com.karuslabs.mockkit.annotations.*;
+
+import java.util.Map;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 
 import static org.mockito.Mockito.*;
 
@@ -64,12 +68,90 @@ public class MockItemStack {
         }
         
         
+        public Builder material(Material material) {
+            when(item.getType()).thenReturn(material);
+            return this;
+        }
+        
+        public Builder amount(int amount) {
+            when(item.getAmount()).thenReturn(amount);
+            return this;
+        }
+        
+        public Builder damage(short damage) {
+            when(item.getDurability()).thenReturn(damage);
+            return this;
+        }
+
+        public Builder data(MaterialData data) {
+            when(item.getData()).thenReturn(data);
+            return this;
+        }
+                
+        public Builder maxSize(int size) {
+            when(item.getMaxStackSize()).thenReturn(size);
+            return this;
+        }
+        
+        public Builder meta(ItemMeta meta) {
+            when(item.getItemMeta()).thenReturn(meta);
+            return this;
+        }
+        
+        public Builder hasMeta(boolean has) {
+            when(item.hasItemMeta()).thenReturn(has);
+            return this;
+        }     
+                
+        
         public Builder containsEnchantment(Enchantment enchantment, boolean contains) {
+            when(item.containsEnchantment(enchantment)).thenReturn(contains);
+            return this;
+        }
+        
+        public Builder containsEnchantment(boolean contains) {
+            when(item.containsEnchantment(any(Enchantment.class))).thenReturn(contains);
+            return this;
+        }
+                
+        public Builder removeEnchantment(Enchantment enchantment, int level) {
+            when(item.removeEnchantment(enchantment)).thenReturn(level);
+            return this;
+        }
+        
+        public Builder removeEnchantment(int level) {
+            when(item.removeEnchantment(any(Enchantment.class))).thenReturn(level);
+            return this;
+        }
+        
+        public Builder enchantmentLevel(Enchantment enchantment, int level) {
+            when(item.getEnchantmentLevel(enchantment)).thenReturn(level);
+            return this;
+        }
+        
+        public Builder enchantmentLevel(int level) {
+            when(item.getEnchantmentLevel(any(Enchantment.class))).thenReturn(level);
+            return this;
+        }
+        
+        public Builder enchantments(Map<Enchantment, Integer> enchantments) {
+            when(item.getEnchantments()).thenReturn(enchantments);
             return this;
         }
         
         
-        public ItemStack build() {
+        public Builder similar(ItemStack item, boolean similar) {
+            when(item.isSimilar(item)).thenReturn(similar);
+            return this;
+        }
+        
+        public Builder similar(boolean similar) {
+            when(item.isSimilar(any(ItemStack.class))).thenReturn(similar);
+            return this;
+        }
+        
+        
+        public @Mock ItemStack build() {
             return item;
         }
         

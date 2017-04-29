@@ -17,6 +17,7 @@
 package com.karuslabs.mockkit.rule;
 
 import com.karuslabs.mockkit.UncheckedReflectiveException;
+import com.karuslabs.mockkit.annotations.PartialMock;
 import com.karuslabs.mockkit.mock.MockPotionEffectType;
 
 import java.lang.reflect.Field;
@@ -27,6 +28,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.junit.rules.ExternalResource;
 
 
+@PartialMock
 public class PotionEffectTypes extends ExternalResource {
     
     public static final PotionEffectTypes INSTANCE = new PotionEffectTypes();
@@ -69,7 +71,7 @@ public class PotionEffectTypes extends ExternalResource {
         byName.clear();
         
         cache.forEach((id, name) -> {
-            PotionEffectType type = MockPotionEffectType.potionEffectType(0, name);
+            @PartialMock PotionEffectType type = MockPotionEffectType.potionEffectType(0, name);
             byId[id] = type;
             byName.put(name, type);
         });

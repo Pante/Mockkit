@@ -16,9 +16,12 @@
  */
 package com.karuslabs.mockkit.rule;
 
+import com.karuslabs.mockkit.annotations.PartialMock;
+
 import org.junit.rules.ExternalResource;
 
 
+@PartialMock
 public class MockkitRule extends ExternalResource {
     
     public static final MockkitRule INSTANCE = new MockkitRule();
