@@ -23,4 +23,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface Implemented {
     
+    String value() default "";
+    
 }

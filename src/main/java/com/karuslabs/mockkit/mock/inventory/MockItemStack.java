@@ -151,7 +151,7 @@ public class MockItemStack {
         }
         
         
-        public @Mock ItemStack build() {
+        public ItemStack build() {
             return item;
         }
         

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.karuslabs.mockkit.stub.scheduler;
+package com.karuslabs.mockkit.stub;
 
 import java.util.concurrent.Future;
 import org.bukkit.plugin.Plugin;
@@ -54,8 +54,9 @@ public class StubTask implements BukkitTask {
 
     @Override
     public void cancel() {
-        Future<?> future = scheduler.getTasks().remove(id);
+        Future<?> future = scheduler.getTasks().getIfPresent(id);
         if (future != null) {
+            scheduler.getTasks().invalidate(id);
             future.cancel(true);
         }
     }

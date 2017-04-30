@@ -113,7 +113,7 @@ public class MockEnchantment {
         }
         
         
-        public @Mock Enchantment build() {
+        public Enchantment build() {
             return enchantment;
         } 
         

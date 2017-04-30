@@ -16,7 +16,9 @@
  */
 package com.karuslabs.mockkit.rule;
 
+import com.karuslabs.mockkit.Mockkit;
 import com.karuslabs.mockkit.annotations.PartialMock;
+import com.karuslabs.mockkit.stub.StubServer;
 
 import org.junit.rules.ExternalResource;
 
@@ -32,6 +34,8 @@ public class MockkitRule extends ExternalResource {
     
     @Override
     protected void before() {
+        Mockkit.INSTANCE.setServer(StubServer.INSTANCE);
+        StubServer.INSTANCE.before();
         Enchantments.INSTANCE.before();
         PotionEffectTypes.INSTANCE.before();
     }

@@ -14,7 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.karuslabs.mockkit.stub.scheduler;
+package com.karuslabs.mockkit.stub;
+
+import com.github.benmanes.caffeine.cache.*;
 
 import com.karuslabs.mockkit.annotations.*;
 
@@ -28,15 +30,18 @@ import org.bukkit.scheduler.*;
 @PartialStub
 public class StubScheduler implements BukkitScheduler {
     
+    public static final StubScheduler INSTANCE = new StubScheduler();
+    
+    
     private ScheduledThreadPoolExecutor scheduler;
-    private ConcurrentMap<Integer, Future<?>> tasks;
+    private Cache<Integer, Future<?>> tasks;
     
     
     protected StubScheduler() {
         scheduler = new ScheduledThreadPoolExecutor(1);
         scheduler.setMaximumPoolSize(4);
         scheduler.setRemoveOnCancelPolicy(true);
-        tasks = new ConcurrentHashMap<>();
+        tasks = Caffeine.newBuilder().weakValues().build();
     }
     
     
@@ -95,7 +100,7 @@ public class StubScheduler implements BukkitScheduler {
     @Override
     public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task) {
         int random = random();
-        Future<?> future = scheduler.submit(() -> { task.run(); tasks.remove(random, task); });
+        Future<?> future = scheduler.submit(task);
         tasks.put(random, future);
         
         return random;
@@ -124,8 +129,9 @@ public class StubScheduler implements BukkitScheduler {
     
     @Override
     public void cancelTask(int taskId) {
-        Future<?> future = tasks.remove(taskId);
+        Future<?> future = tasks.getIfPresent(taskId);
         if (future != null) {
+            tasks.invalidate(taskId);
             future.cancel(true);
         }
     }
@@ -138,7 +144,7 @@ public class StubScheduler implements BukkitScheduler {
 
     @Override
     public void cancelAllTasks() {
-        tasks.forEach((id, future) -> { future.cancel(true); tasks.remove(id, future); });
+        tasks.asMap().forEach((id, future) -> { future.cancel(true); tasks.invalidate(id); });
     }
 
     
@@ -246,11 +252,11 @@ public class StubScheduler implements BukkitScheduler {
 
     @Override
     public @Stub BukkitTask runTaskTimerAsynchronously(Plugin plugin, BukkitRunnable task, long delay, long period) {
-        return runTaskTimerAsynchronously(plugin, task, delay, period);
+        return runTaskTimerAsynchronously(plugin, (Runnable) task, delay, period);
     }
 
     
-    public ConcurrentMap<Integer, Future<?>> getTasks() {
+    public Cache<Integer, Future<?>> getTasks() {
         return tasks;
     }
     

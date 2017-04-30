@@ -79,7 +79,7 @@ public class MockPotionEffectType {
         }
         
         
-        public @Mock PotionEffectType build() {
+        public PotionEffectType build() {
             return type;
         }
         
