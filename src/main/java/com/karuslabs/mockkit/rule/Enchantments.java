@@ -17,8 +17,8 @@
 package com.karuslabs.mockkit.rule;
 
 import com.karuslabs.mockkit.UncheckedReflectiveException;
-import com.karuslabs.mockkit.annotations.PartialMock;
-import com.karuslabs.mockkit.mock.MockEnchantment;
+import com.karuslabs.mockkit.annotations.PartialStub;
+import com.karuslabs.mockkit.stub.StubEnchantment;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -28,7 +28,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.junit.rules.ExternalResource;
 
 
-@PartialMock
 public class Enchantments extends ExternalResource {    
     
     public static final Enchantments INSTANCE = new Enchantments();
@@ -71,7 +70,7 @@ public class Enchantments extends ExternalResource {
         byName.clear();
 
         cache.forEach((id, name) -> {
-            @PartialMock Enchantment enchantment = MockEnchantment.enchantment(id, name);
+            @PartialStub Enchantment enchantment = new StubEnchantment(id, name);
             byId.put(id, enchantment);
             byName.put(name, enchantment);
         });

@@ -16,6 +16,7 @@
  */
 package com.karuslabs.mockkit.stub;
 
+import com.karuslabs.mockkit.stub.inventory.StubItemFactory;
 import com.avaje.ebean.config.ServerConfig;
 
 import com.karuslabs.mockkit.annotations.Implemented;

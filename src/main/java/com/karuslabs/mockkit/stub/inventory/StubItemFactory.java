@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.karuslabs.mockkit.stub;
+package com.karuslabs.mockkit.stub.inventory;
 
 import com.karuslabs.mockkit.annotations.Unimplemented;
 import com.karuslabs.mockkit.mock.inventory.meta.*;
