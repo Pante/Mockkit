@@ -70,9 +70,10 @@ public class StubServer extends ExternalResource implements Server {
     
     @Override
     public void before() {
-       reset(manager);
-       reset(commandMap);
-       reset(logger);
+        players.clear();
+        reset(manager);
+        reset(commandMap);
+        reset(logger);
     }
     
 
