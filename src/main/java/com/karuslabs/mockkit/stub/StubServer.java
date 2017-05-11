@@ -52,7 +52,7 @@ public class StubServer extends ExternalResource implements Server {
     
     public static final StubServer INSTANCE = new StubServer();
     
-    private List<Player> players;
+    private Collection<Player> players;
     private BukkitScheduler scheduler;
     private PluginManager manager;
     private SimpleCommandMap commandMap;
@@ -105,6 +105,10 @@ public class StubServer extends ExternalResource implements Server {
     @Override
     public Collection<? extends Player> getOnlinePlayers() {
         return players;
+    }
+    
+    public void setOnlinePlayers(Collection<Player> players) {
+        this.players = players;
     }
     
 
