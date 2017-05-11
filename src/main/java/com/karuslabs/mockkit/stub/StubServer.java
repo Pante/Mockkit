@@ -52,7 +52,7 @@ public class StubServer extends ExternalResource implements Server {
     
     public static final StubServer INSTANCE = new StubServer();
     
-    
+    private List<Player> players;
     private BukkitScheduler scheduler;
     private PluginManager manager;
     private SimpleCommandMap commandMap;
@@ -60,6 +60,7 @@ public class StubServer extends ExternalResource implements Server {
     
     
     private StubServer() {
+        players = new ArrayList<>();
         scheduler = new StubScheduler();
         manager = mock(PluginManager.class);
         commandMap = mock(SimpleCommandMap.class);
@@ -102,8 +103,9 @@ public class StubServer extends ExternalResource implements Server {
 
     @Override
     public Collection<? extends Player> getOnlinePlayers() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        return players;
     }
+    
 
     @Override
     public int getMaxPlayers() {
