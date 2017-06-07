@@ -58,7 +58,7 @@ public class MockItemStack {
     }
     
     
-    protected static class Builder {
+    public static class Builder {
         
         private ItemStack item;
         
