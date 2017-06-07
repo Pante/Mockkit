@@ -43,4 +43,9 @@ public class ServerRule extends ExternalResource {
         Mockkit.INSTANCE.setServer(server);
     }
     
+    
+    public Server getServer() {
+        return server;
+    }
+    
 }
