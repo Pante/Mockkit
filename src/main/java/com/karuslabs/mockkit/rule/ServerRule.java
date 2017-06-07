@@ -39,7 +39,6 @@ public class ServerRule extends ExternalResource {
     
     @Override
     protected void before() {
-        reset(server);
         Mockkit.INSTANCE.setServer(server);
     }
     
