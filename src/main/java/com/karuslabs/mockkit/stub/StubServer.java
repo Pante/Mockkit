@@ -17,7 +17,6 @@
 package com.karuslabs.mockkit.stub;
 
 import com.karuslabs.mockkit.stub.inventory.StubItemFactory;
-import com.avaje.ebean.config.ServerConfig;
 
 import com.karuslabs.mockkit.annotations.Implemented;
 
@@ -27,6 +26,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 import org.bukkit.*;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.boss.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -41,7 +41,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
-import org.bukkit.craftbukkit.v1_11_R1.inventory.*;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
 
 import org.junit.rules.ExternalResource;
 
@@ -95,11 +95,6 @@ public class StubServer extends ExternalResource implements Server {
     @Implemented
     public String getBukkitVersion() {
         return "";
-    }
-
-    @Override
-    public Player[] _INVALID_getOnlinePlayers() {
-        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
@@ -320,11 +315,6 @@ public class StubServer extends ExternalResource implements Server {
 
     @Override
     public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
-
-    @Override
-    public void configureDbConfig(ServerConfig config) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
@@ -609,4 +599,20 @@ public class StubServer extends ExternalResource implements Server {
     public Set<String> getListeningPluginChannels() {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+
+    @Override
+    public void reloadData() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Advancement getAdvancement(NamespacedKey key) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Iterator<Advancement> advancementIterator() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
 }
